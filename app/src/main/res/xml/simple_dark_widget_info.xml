@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:description="@string/app_widget_description"
+    android:initialKeyguardLayout="@layout/simple_dark_widget"
+    android:initialLayout="@layout/simple_dark_widget"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:previewImage="@drawable/simple_widget_promo_dark"
+    android:previewLayout="@layout/simple_dark_widget"
+    android:targetCellWidth="4"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"
+    tools:ignore="UnusedAttribute" />

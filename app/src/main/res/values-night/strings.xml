@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Погода</string>
+    <string name="_14">14%</string>
+    <string name="_prescription">Влажность</string>
+    <string name="_20_c_23_c">Вчера: 20°C/23°C</string>
+    <string name="more">Подробнее</string>
+    <string name="_10">Завтра, 10 Декабря</string>
+    <string name="text_1">Очень низкая температура</string>
+    <string name="_9">Сегодня, 9 Декабря</string>
+    <string name="chs">Предупреждения о ЧС</string>
+    <string name="sunny">Солнечно</string>
+    <string name="_15_c_30_c_27_c">15°C/30°C Ощущается как 27°C</string>
+    <string name="_27_c">27°C</string>
+    <string name="_9_11_00">Вт, 9 Декабря, 11:00</string>
+    <string name="ciry">Омск</string>
+    <string name="UV">УФ индекс</string>
+    <string name="low">Низкий</string>
+    <string name="hourly">Почасовой прогноз</string>
+    <string name="sunrise_and_sunset">Восход и закат</string>
+    <string name="sunrise">Восход</string>
+    <string name="_10_00">10:00</string>
+    <string name="_sunrise">Закат</string>
+    <string name="_10_00_">10:00</string>
+    <string name="app_widget_description">Виджет с часами, датой, текущей погодой, шансом дождя и предупреждениями</string>
+    <string name="appwidget_text">EXAMPLE</string>
+</resources>

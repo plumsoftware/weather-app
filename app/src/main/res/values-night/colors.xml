@@ -1,0 +1,85 @@
+<resources>
+    <color name="seed">#5C69F2</color>
+    <color name="md_theme_dark_primary">#8288D3</color>
+    <color name="md_theme_dark_onPrimary">#000EA4</color>
+    <color name="md_theme_dark_primaryContainer">#2430BE</color>
+    <color name="md_theme_dark_onPrimaryContainer">#E0E0FF</color>
+    <color name="md_theme_dark_secondary">#A5C8FF</color>
+    <color name="md_theme_dark_onSecondary">#00315E</color>
+    <color name="md_theme_dark_secondaryContainer">#004785</color>
+    <color name="md_theme_dark_onSecondaryContainer">#D4E3FF</color>
+    <color name="md_theme_dark_tertiary">#DFC725</color>
+    <color name="md_theme_dark_onTertiary">#383100</color>
+    <color name="md_theme_dark_tertiaryContainer">#514700</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FCE343</color>
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_dark_background">#001F2A</color>
+    <color name="md_theme_dark_onBackground">#BFE9FF</color>
+    <color name="md_theme_dark_surface">#001F2A</color>
+    <color name="md_theme_dark_onSurface">#BFE9FF</color>
+    <color name="md_theme_dark_surfaceVariant">#46464F</color>
+    <color name="md_theme_dark_onSurfaceVariant">#C7C5D0</color>
+    <color name="md_theme_dark_outline">#91909A</color>
+    <color name="md_theme_dark_inverseOnSurface">#001F2A</color>
+    <color name="md_theme_dark_inverseSurface">#BFE9FF</color>
+    <color name="md_theme_dark_inversePrimary">#404DD6</color>
+    <color name="md_theme_dark_shadow">#000000</color>
+    <color name="md_theme_dark_surfaceTint">#BDC2FF</color>
+    <color name="md_theme_dark_outlineVariant">#46464F</color>
+    <color name="md_theme_dark_scrim">#000000</color>
+    <color name="CustomColor">#C3E4FB</color>
+
+    <color name="orange_900">#F57F17</color>
+    <color name="orange_800">#FF8F00</color>
+    <color name="orange_700">#FFA000</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_400">#FFA726</color>
+
+    <color name="blue_900">#1A237E</color>
+    <color name="blue_800">#283593</color>
+    <color name="blue_700">#303F9F</color>
+    <color name="blue_500">#3F51B5</color>
+    <color name="blue_400">#5C6BC0</color>
+
+    <color name="red_900">#B71C1C</color>
+    <color name="red_800">#C62828</color>
+    <color name="red_700">#D32F2F</color>
+    <color name="red_500">#D32F2F</color>
+    <color name="red_400">#EF5350</color>
+
+    <color name="purple_900">#4A148C</color>
+    <color name="purple_800">#4527A0</color>
+    <color name="purple_700">#512DA8</color>
+    <color name="purple_500">#673AB7</color>
+    <color name="purple_400">#7E57C2</color>
+
+    <color name="green_900">#1B5E20</color>
+    <color name="green_800">#2E7D32</color>
+    <color name="green_700">#388E3C</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_400">#66BB6A</color>
+
+    <color name="pink_900">#880E4F</color>
+    <color name="pink_800">#AD1457</color>
+    <color name="pink_700">#C2185B</color>
+    <color name="pink_500">#E91E63</color>
+    <color name="pink_400">#EC407A</color>
+
+    <color name="yellow_900">#F57F17</color>
+    <color name="yellow_800">#F9A825</color>
+    <color name="yellow_700">#FBC02D</color>
+    <color name="yellow_600">#FDD835</color>
+    <color name="yellow_500">#FFEB3B</color>
+    <color name="yellow_400">#FFEE58</color>
+
+    <color name="white">#FFF</color>
+    <color name="primary_text_dark">@android:color/primary_text_light</color>
+    <color name="secondary_text_dark">#66000000</color>
+    <color name="dark">#1C1C1C</color>
+    <color name="primary_text_light">@android:color/primary_text_dark</color>
+    <color name="secondary_text_light">#66FFFFFF</color>
+    <color name="gray_light">#F8F8F8</color>
+</resources>

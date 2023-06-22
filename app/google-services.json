@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "641967852589",
+    "project_id": "weather-ru-2023",
+    "storage_bucket": "weather-ru-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641967852589:android:099de7ef49108b70edfca4",
+        "android_client_info": {
+          "package_name": "ru.plumsoftware.weatherapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641967852589-8m420kp39nliplgg6cvpag72skufbku3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfuTa4f4eLiQOCipY5_n8StJeDfHIrvRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641967852589-8m420kp39nliplgg6cvpag72skufbku3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

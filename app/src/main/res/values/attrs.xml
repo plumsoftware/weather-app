@@ -1,0 +1,17 @@
+<resources>
+    <attr name="colorCustomColor" format="color" />
+    <attr name="colorOnCustomColor" format="color" />
+    <attr name="colorCustomColorContainer" format="color" />
+    <attr name="colorOnCustomColorContainer" format="color" />
+    <attr name="harmonizeCustomColor" format="boolean" />
+
+    <attr name="colorText" format="color" />
+    <attr name="colorTextNotEnabled" format="color" />
+    <attr name="colorCard" format="color" />
+
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetPadding" format="dimension" />
+        <attr name="appWidgetInnerRadius" format="dimension" />
+        <attr name="appWidgetRadius" format="dimension" />
+    </declare-styleable>
+</resources>

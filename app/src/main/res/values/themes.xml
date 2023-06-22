@@ -1,0 +1,91 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--    <style name="AppTheme.Погода" parent="Theme.Material3.Light.NoActionBar">-->
+    <style name="AppTheme.Погода" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+<!--        <item name="android:colorBackground">@color/md_theme_light_background</item>-->
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorCustomColor">#00658b</item>
+        <item name="colorOnCustomColor">#ffffff</item>
+        <item name="colorCustomColorContainer">#c5e7ff</item>
+        <item name="colorOnCustomColorContainer">#001e2d</item>
+        <item name="harmonizeCustomColor">true</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#5F6DF2</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">#eaf3fb</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <!-- Font -->
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <!-- Text color -->
+        <item name="colorText">@color/md_theme_light_text</item>
+        <!-- Card -->
+        <item name="colorCard">@color/md_theme_light_card</item>
+        <item name="colorTextNotEnabled">#7274E9</item>
+    </style>
+
+    <style name="button" parent="Widget.Material3.Button">
+        <item name="colorPrimary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onTertiary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+    </style>
+
+    <style name="Widget.Weather.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+    </style>
+
+    <style name="Widget.Погода.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="Widget.Погода.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+    </style>
+
+    <style name="AppTheme.Погода.AppWidgetContainerParent">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+        <item name="appWidgetRadius">16dp</item>
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+        <item name="appWidgetInnerRadius">16dp</item>
+    </style>
+
+    <style name="Theme.Погода.AppWidgetContainer" parent="AppTheme.Погода.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+        <item name="appWidgetPadding">16dp</item>
+    </style>
+
+    <style name="AnimationDialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_sheet_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_sheet_exit</item>
+    </style>
+</resources>
