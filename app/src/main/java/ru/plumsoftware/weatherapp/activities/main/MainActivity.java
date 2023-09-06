@@ -78,7 +78,6 @@ import ru.plumsoftware.weatherapp.adapters.AlertAdapter;
 import ru.plumsoftware.weatherapp.adapters.WeatherForecastAdapter;
 import ru.plumsoftware.weatherapp.links.ApiData;
 import ru.plumsoftware.weatherapp.links.Link;
-import ru.plumsoftware.weatherapp.services.WeatherService;
 import ru.plumsoftware.weatherapp.weatherdata.current.CurrentWeather;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.AirQuality;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.Alert;

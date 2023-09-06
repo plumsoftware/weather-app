@@ -50,5 +50,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_back"
         android:padding="14dp"
+        android:tint="#6C621E"
         app:srcCompat="@drawable/ic_round_my_location" />
 </LinearLayout>

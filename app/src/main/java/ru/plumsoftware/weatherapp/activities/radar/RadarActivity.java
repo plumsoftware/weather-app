@@ -4,15 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.yandex.mobile.ads.banner.AdSize;
 import com.yandex.mobile.ads.banner.BannerAdEventListener;
+import com.yandex.mobile.ads.banner.BannerAdSize;
 import com.yandex.mobile.ads.banner.BannerAdView;
 import com.yandex.mobile.ads.common.AdRequest;
 import com.yandex.mobile.ads.common.AdRequestError;
@@ -28,6 +31,10 @@ public class RadarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radar);
 
+        WindowManager windowManager = (WindowManager) RadarActivity.this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
 //        region::Views
         ImageView imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
         ImageView imageViewMap = (ImageView) findViewById(R.id.imageViewMap);
@@ -38,7 +45,7 @@ public class RadarActivity extends AppCompatActivity {
         Glide.with(RadarActivity.this).load("https://tile.openweathermap.org/map/temp_new/1/1/1.png?appid=8babcdab0f80b414d35b6d4b0f3e752e").into(imageViewMap);
 
         mBannerAdView.setAdUnitId("R-M-2149019-3");
-        mBannerAdView.setAdSize(AdSize.flexibleSize(300, 160));
+        mBannerAdView.setAdSize(BannerAdSize.inlineSize(RadarActivity.this, displayMetrics.widthPixels, 160));
 
         AdRequest adRequest = new AdRequest.Builder().build();
 
