@@ -9,10 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Добавил рекламу при открытии приложения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/release/app-release.aab" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +62,7 @@
     <option name="KEY_STORE_PATH" value="C:\Users\sl1vka\AndroidStudioProjects\WeatherApp\weather_app_store.jks" />
     <option name="KEY_ALIAS" value="key_weather_app" />
     <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -283,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694001778116</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Добавил рекламу при открытии приложения">
+      <created>1695054290060</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1695054290060</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,6 +315,7 @@
     <MESSAGE value="апк" />
     <MESSAGE value="Да" />
     <MESSAGE value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
-    <option name="LAST_COMMIT_MESSAGE" value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
+    <MESSAGE value="Добавил рекламу при открытии приложения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил рекламу при открытии приложения" />
   </component>
 </project>
