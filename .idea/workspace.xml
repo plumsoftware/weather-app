@@ -9,29 +9,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="ывапарпор">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lint-baseline.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/release/app-release.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/radar/RadarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/radar/RadarActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/private_key.pepk" beforeDir="false" afterPath="$PROJECT_DIR$/private_key.pepk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/app-release.aab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output-metadata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RZ8M904EVGN]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\sl1vka\.android\avd\Pixel_5_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -91,29 +79,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ApkExportedModule": "Погода.app",
-    "BundleExportedModule": "Погода.app",
-    "ExportApk.ApkPathForПогода.app": "C:\\Users\\sl1vka\\AndroidStudioProjects\\WeatherApp",
-    "ExportBundle.BundlePathForПогода.app": "C:\\Users\\sl1vka\\AndroidStudioProjects\\WeatherApp\\release",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "C:/Users/sl1vka/AndroidStudioProjects/WeatherApp/release",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ApkExportedModule&quot;: &quot;Погода.app&quot;,
+    &quot;BundleExportedModule&quot;: &quot;Погода.app&quot;,
+    &quot;ExportApk.ApkPathForПогода.app&quot;: &quot;C:\\Users\\sl1vka\\AndroidStudioProjects\\WeatherApp&quot;,
+    &quot;ExportBundle.BundlePathForПогода.app&quot;: &quot;C:\\Users\\sl1vka\\AndroidStudioProjects\\WeatherApp\\release&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sl1vka/AndroidStudioProjects/WeatherApp/release&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   },
-  "keyToStringList": {
-    "ExportApk.BuildVariants": [
-      "release"
+  &quot;keyToStringList&quot;: {
+    &quot;ExportApk.BuildVariants&quot;: [
+      &quot;release&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.plumsoftware.weatherapp.adapters" />
@@ -288,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686215324528</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода">
+      <created>1694001778116</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694001778116</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -310,6 +305,7 @@
     <MESSAGE value="Изменил дизайн (шрифты) и обновил библиотеки в gradle файле." />
     <MESSAGE value="апк" />
     <MESSAGE value="Да" />
-    <option name="LAST_COMMIT_MESSAGE" value="Да" />
+    <MESSAGE value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
+    <option name="LAST_COMMIT_MESSAGE" value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
   </component>
 </project>

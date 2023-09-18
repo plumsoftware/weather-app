@@ -31,6 +31,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.yandex.mobile.ads.appopenad.AppOpenAd;
+import com.yandex.mobile.ads.appopenad.AppOpenAdEventListener;
+import com.yandex.mobile.ads.appopenad.AppOpenAdLoadListener;
+import com.yandex.mobile.ads.appopenad.AppOpenAdLoader;
+import com.yandex.mobile.ads.common.AdError;
+import com.yandex.mobile.ads.common.AdRequestConfiguration;
 import com.yandex.mobile.ads.common.AdRequestError;
 import com.yandex.mobile.ads.common.ImpressionData;
 import com.yandex.mobile.ads.common.InitializationListener;
@@ -44,6 +50,8 @@ import com.yandex.mobile.ads.nativeads.NativeAdView;
 import com.yandex.mobile.ads.nativeads.NativeAdViewBinder;
 import com.yandex.mobile.ads.nativeads.NativeBulkAdLoadListener;
 import com.yandex.mobile.ads.nativeads.NativeBulkAdLoader;
+import com.yandex.mobile.ads.rewarded.RewardedAd;
+import com.yandex.mobile.ads.rewarded.RewardedAdLoader;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -88,6 +96,15 @@ import ru.plumsoftware.weatherapp.weatherdata.forecast.Hour;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
+    @Nullable
+    private RewardedAd mRewardedAd = null;
+    @Nullable
+    private RewardedAdLoader mRewardedAdLoader = null;
+    private AppOpenAdLoader appOpenAdLoader = null;
+    private final String AD_UNIT_ID = "R-M-2149019-4";
+    private final AdRequestConfiguration adRequestConfiguration = new AdRequestConfiguration.Builder(AD_UNIT_ID).build();
+
+    private AppOpenAd mAppOpenAd = null;
 
     @SuppressLint({"MissingInflatedId", "LocalSuppress"})
     @Override
@@ -96,10 +113,72 @@ public class MainActivity extends AppCompatActivity {
 //        region::Base variables
         Context context = MainActivity.this;
         Activity activity = MainActivity.this;
+        ProgressDialog progressDialog = new ProgressDialog(context);
 //        endregion
         final Settings[] settings = {Settings.getUserSettings(context)};
         AppCompatDelegate.setDefaultNightMode(convertToTheme(settings[0].getTheme()));
         setContentView(R.layout.activity_main);
+
+        progressDialog.show();
+        MobileAds.initialize(this, () -> {
+
+        });
+
+        appOpenAdLoader = new AppOpenAdLoader(context);
+        AppOpenAdLoadListener appOpenAdLoadListener = new AppOpenAdLoadListener() {
+            @Override
+            public void onAdLoaded(@NonNull final AppOpenAd appOpenAd) {
+                // The ad was loaded successfully. Now you can show loaded ad.
+                mAppOpenAd = appOpenAd;
+                mAppOpenAd.show(activity);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
+                // Ad failed to load with AdRequestError.
+                // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+                progressDialog.dismiss();
+            }
+        };
+        appOpenAdLoader.setAdLoadListener(appOpenAdLoadListener);
+        appOpenAdLoader.loadAd(adRequestConfiguration);
+
+        AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
+            @Override
+            public void onAdShown() {
+                // Called when ad is shown.
+            }
+
+            @Override
+            public void onAdFailedToShow(@NonNull final AdError adError) {
+                // Called when ad failed to show.
+            }
+
+            @Override
+            public void onAdDismissed() {
+                // Called when ad is dismissed.
+                // Clean resources after dismiss and preload new ad.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Called when a click is recorded for an ad.
+            }
+
+            @Override
+            public void onAdImpression(@Nullable final ImpressionData impressionData) {
+                // Called when an impression is recorded for an ad.
+            }
+        };
+
+        if (mAppOpenAd != null) {
+            mAppOpenAd.setAdEventListener(appOpenAdEventListener);
+        }
+
+        if (mAppOpenAd != null) {
+            mAppOpenAd.show(activity);
+        }
 
 //        region::Service
 //        Intent intent = new Intent(this, WeatherService.class);
@@ -165,16 +244,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tvHeadline = (TextView) activity.findViewById(R.id.tvHeadline);
         TextView warning = (TextView) activity.findViewById(R.id.textViewWarning);
         CardView adsCard = (CardView) activity.findViewById(R.id.cardView2);
-
-        MobileAds.initialize(context, new InitializationListener() {
-            @Override
-            public void onInitializationCompleted() {
-            }
-        });
 //        endregion
 
 //        region::Load ad
-        ProgressDialog progressDialog = new ProgressDialog(context);
         final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
         final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
         nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
