@@ -9,19 +9,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Поменял grable на более новую версию">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/fetch_location_back.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="[+] Перешел на новую версию gradle&#10;[+] Сделал новый задник для кнопки определения местоположения&#10;[+] Сделал, чтобы реклама показывалась только при третьем входе в приложение">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/about/AboutActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/about/AboutActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/locations/LocationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/locations/LocationActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/radar/RadarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/radar/RadarActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/settings/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/settings/SettingsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/data/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/data/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/dialogs/ProgressDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/dialogs/ProgressDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output-metadata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695054395032</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[+] Перешел на новую версию gradle&#10;[+] Сделал новый задник для кнопки определения местоположения&#10;[+] Сделал, чтобы реклама показывалась только при третьем входе в приложение">
+      <created>1702188303584</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702188303584</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,6 +334,7 @@
     <MESSAGE value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
     <MESSAGE value="Добавил рекламу при открытии приложения" />
     <MESSAGE value="Поменял grable на более новую версию" />
-    <option name="LAST_COMMIT_MESSAGE" value="Поменял grable на более новую версию" />
+    <MESSAGE value="[+] Перешел на новую версию gradle&#10;[+] Сделал новый задник для кнопки определения местоположения&#10;[+] Сделал, чтобы реклама показывалась только при третьем входе в приложение" />
+    <option name="LAST_COMMIT_MESSAGE" value="[+] Перешел на новую версию gradle&#10;[+] Сделал новый задник для кнопки определения местоположения&#10;[+] Сделал, чтобы реклама показывалась только при третьем входе в приложение" />
   </component>
 </project>

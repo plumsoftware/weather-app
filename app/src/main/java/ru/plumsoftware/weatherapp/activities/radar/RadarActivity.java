@@ -22,7 +22,9 @@ import com.yandex.mobile.ads.common.AdRequestError;
 import com.yandex.mobile.ads.common.ImpressionData;
 
 import ru.plumsoftware.weatherapp.R;
+import ru.plumsoftware.weatherapp.activities.locations.LocationActivity;
 import ru.plumsoftware.weatherapp.activities.main.MainActivity;
+import ru.plumsoftware.weatherapp.data.Settings;
 
 public class RadarActivity extends AppCompatActivity {
 
@@ -98,6 +100,6 @@ public class RadarActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(0, 0);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class).putExtra("showAppOpen", false));
     }
 }

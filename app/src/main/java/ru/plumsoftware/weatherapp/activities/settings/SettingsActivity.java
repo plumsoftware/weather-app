@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.plumsoftware.weatherapp.R;
+import ru.plumsoftware.weatherapp.activities.locations.LocationActivity;
 import ru.plumsoftware.weatherapp.activities.main.MainActivity;
 import ru.plumsoftware.weatherapp.data.Settings;
 import ru.plumsoftware.weatherapp.dialogs.MyBottomSheetDialog;
@@ -104,6 +105,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(0, 0);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class).putExtra("showAppOpen", false));
     }
 }

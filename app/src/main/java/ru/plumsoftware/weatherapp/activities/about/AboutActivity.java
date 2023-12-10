@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import ru.plumsoftware.weatherapp.BuildConfig;
 import ru.plumsoftware.weatherapp.R;
+import ru.plumsoftware.weatherapp.activities.locations.LocationActivity;
 import ru.plumsoftware.weatherapp.activities.main.MainActivity;
+import ru.plumsoftware.weatherapp.data.Settings;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -39,5 +41,11 @@ public class AboutActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(0, 0);
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Settings.getUserSettings(AboutActivity.this).putValue("showAppOpen", false);
     }
 }

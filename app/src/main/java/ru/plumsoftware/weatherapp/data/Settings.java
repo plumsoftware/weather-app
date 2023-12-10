@@ -2,6 +2,7 @@ package ru.plumsoftware.weatherapp.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -11,6 +12,8 @@ public class Settings {
     private int theme;
 
     private int showAd;
+
+    private boolean showAppOpen;
 
     protected static SharedPreferences sharedPreferences;
 
@@ -44,6 +47,16 @@ public class Settings {
         this.showAd = showAd;
     }
 
+    public Settings(String q, String city, String lang, String system, int theme, int showAd, boolean showAppOpen) {
+        this.q = q;
+        this.city = city;
+        this.lang = lang;
+        this.system = system;
+        this.theme = theme;
+        this.showAd = showAd;
+        this.showAppOpen = showAppOpen;
+    }
+
     public static Settings getUserSettings(Context context) {
         sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
 
@@ -53,8 +66,9 @@ public class Settings {
         String city = sharedPreferences.getString("city", "");
         int theme = sharedPreferences.getInt("theme", AppCompatDelegate.MODE_NIGHT_NO);
         int showAd = sharedPreferences.getInt("showAd", 0);
-
-        return new Settings(q, city, lang, system, theme, showAd);
+        boolean showAppOpen = sharedPreferences.getBoolean("showAppOpen", true);
+        Log.d("TAG", "ShowAppOpen: " + Boolean.toString(showAppOpen));
+        return new Settings(q, city, lang, system, theme, showAd, showAppOpen);
     }
 
     public void putValue(String name, Object value) {
@@ -73,6 +87,15 @@ public class Settings {
             editor.apply();
             return;
         }
+
+        if (value instanceof Boolean) {
+            boolean b = (boolean) value;
+            editor.putBoolean(name, b);
+            editor.apply();
+            return;
+        }
+
+        Log.d("TAG", "ShowAppOpen: " + value.toString());
     }
 
     public void putValue(String name, Integer value) {
@@ -104,6 +127,10 @@ public class Settings {
 
     public int getShowAd() {
         return showAd;
+    }
+
+    public boolean isShowAppOpen() {
+        return showAppOpen;
     }
 
     //    endregion

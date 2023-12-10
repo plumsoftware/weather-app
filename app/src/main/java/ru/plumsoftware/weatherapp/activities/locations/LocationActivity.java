@@ -300,6 +300,6 @@ public class LocationActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(0, 0);
-        startActivity(new Intent(LocationActivity.this, MainActivity.class));
+        startActivity(new Intent(LocationActivity.this, MainActivity.class).putExtra("showAppOpen", false));
     }
 }

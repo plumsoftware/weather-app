@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -190,64 +191,66 @@ public class MainActivity extends AppCompatActivity {
 //        endregion
 
 //        region::Load ad
-        if (settings[0].getShowAd() > 2) {
-            progressDialog.show();
-            appOpenAdLoader = new AppOpenAdLoader(context);
-            AppOpenAdLoadListener appOpenAdLoadListener = new AppOpenAdLoadListener() {
-                @Override
-                public void onAdLoaded(@NonNull final AppOpenAd appOpenAd) {
-                    // The ad was loaded successfully. Now you can show loaded ad.
-                    mAppOpenAd = appOpenAd;
+        if (getIntent().getBooleanExtra("showAppOpen", true)) {
+            if (settings[0].getShowAd() > 2) {
+                progressDialog.show();
+                appOpenAdLoader = new AppOpenAdLoader(context);
+                AppOpenAdLoadListener appOpenAdLoadListener = new AppOpenAdLoadListener() {
+                    @Override
+                    public void onAdLoaded(@NonNull final AppOpenAd appOpenAd) {
+                        // The ad was loaded successfully. Now you can show loaded ad.
+                        mAppOpenAd = appOpenAd;
+                        mAppOpenAd.show(activity);
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
+                        // Ad failed to load with AdRequestError.
+                        // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+                        progressDialog.dismiss();
+                    }
+                };
+                appOpenAdLoader.setAdLoadListener(appOpenAdLoadListener);
+                appOpenAdLoader.loadAd(adRequestConfiguration);
+
+                AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
+                    @Override
+                    public void onAdShown() {
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onAdFailedToShow(@NonNull final AdError adError) {
+                        progressDialog.dismiss();
+                        // Called when ad failed to show.
+                    }
+
+                    @Override
+                    public void onAdDismissed() {
+                        // Called when ad is dismissed.
+                        // Clean resources after dismiss and preload new ad.
+                    }
+
+                    @Override
+                    public void onAdClicked() {
+                        // Called when a click is recorded for an ad.
+                    }
+
+                    @Override
+                    public void onAdImpression(@Nullable final ImpressionData impressionData) {
+                        progressDialog.dismiss();
+                        // Called when an impression is recorded for an ad.
+                    }
+                };
+
+                if (mAppOpenAd != null) {
+                    mAppOpenAd.setAdEventListener(appOpenAdEventListener);
                     mAppOpenAd.show(activity);
                 }
-
-                @Override
-                public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
-                    // Ad failed to load with AdRequestError.
-                    // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
-                    progressDialog.dismiss();
-                }
-            };
-            appOpenAdLoader.setAdLoadListener(appOpenAdLoadListener);
-            appOpenAdLoader.loadAd(adRequestConfiguration);
-
-            AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
-                @Override
-                public void onAdShown() {
-                    progressDialog.dismiss();
-                }
-
-                @Override
-                public void onAdFailedToShow(@NonNull final AdError adError) {
-                    progressDialog.dismiss();
-                    // Called when ad failed to show.
-                }
-
-                @Override
-                public void onAdDismissed() {
-                    // Called when ad is dismissed.
-                    // Clean resources after dismiss and preload new ad.
-                }
-
-                @Override
-                public void onAdClicked() {
-                    // Called when a click is recorded for an ad.
-                }
-
-                @Override
-                public void onAdImpression(@Nullable final ImpressionData impressionData) {
-                    progressDialog.dismiss();
-                    // Called when an impression is recorded for an ad.
-                }
-            };
-
-            if (mAppOpenAd != null) {
-                mAppOpenAd.setAdEventListener(appOpenAdEventListener);
-                mAppOpenAd.show(activity);
+                progressDialog.dismiss();
+            } else {
+                progressDialog.dismiss();
             }
-            progressDialog.dismiss();
-        } else {
-            progressDialog.dismiss();
         }
 
         if (settings[0].getShowAd() > 2) {
@@ -433,9 +436,9 @@ public class MainActivity extends AppCompatActivity {
         imageViewAddLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(MainActivity.this, LocationActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
             }
         });
         imageViewSearch.setOnClickListener(new View.OnClickListener() {
@@ -697,20 +700,25 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.map:
-                                startActivity(new Intent(context, RadarActivity.class));
+                                startActivity(new Intent(context, RadarActivity.class).putExtra("showAppOpen", false));
+                                finish();
+                                overridePendingTransition(0, 0);
                                 break;
                             case R.id.settings:
-                                startActivity(new Intent(context, SettingsActivity.class));
+                                startActivity(new Intent(context, SettingsActivity.class).putExtra("showAppOpen", false));
+                                finish();
+                                overridePendingTransition(0, 0);
                                 break;
                             case R.id.locations:
-                                startActivity(new Intent(context, LocationActivity.class));
+                                startActivity(new Intent(context, LocationActivity.class).putExtra("showAppOpen", false));
+                                finish();
+                                overridePendingTransition(0, 0);
                                 break;
                             case R.id.about:
-                                startActivity(new Intent(context, AboutActivity.class));
-                                break;
-                            default:
-                                overridePendingTransition(0, 0);
+                                startActivity(new Intent(context, AboutActivity.class).putExtra("showAppOpen", false));
                                 finish();
+                                overridePendingTransition(0, 0);
+                                break;
                         }
                         return false;
                     }
