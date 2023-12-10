@@ -9,18 +9,26 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Добавил рекламу при открытии приложения">
+    <list default="true" id="ed39ae85-b5fe-4f7e-808a-b39a3cb094e0" name="Changes" comment="Поменял grable на более новую версию">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/fetch_location_back.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/activities/main/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/data/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/data/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/dialogs/ProgressDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/plumsoftware/weatherapp/dialogs/ProgressDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_location.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/release/app-release.aab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output-metadata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\sl1vka\.android\avd\Pixel_5_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RZ8M904EVGN]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -51,9 +59,9 @@
       <list>
         <option value="valueResourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -292,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695054290060</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Поменял grable на более новую версию">
+      <created>1695054395032</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1695054395032</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -316,6 +331,7 @@
     <MESSAGE value="Да" />
     <MESSAGE value="Перешел на РСЯ 6.0.0&#10;Небольшой рефакторинг кода" />
     <MESSAGE value="Добавил рекламу при открытии приложения" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил рекламу при открытии приложения" />
+    <MESSAGE value="Поменял grable на более новую версию" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поменял grable на более новую версию" />
   </component>
 </project>

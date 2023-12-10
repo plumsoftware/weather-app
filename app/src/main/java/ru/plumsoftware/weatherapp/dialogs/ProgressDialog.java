@@ -28,11 +28,7 @@ public class ProgressDialog {
 
     public void dismiss() {
         if (dialog != null) {
-            try {
-                dialog.dismiss();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+            dialog.dismiss();
         }
     }
 }

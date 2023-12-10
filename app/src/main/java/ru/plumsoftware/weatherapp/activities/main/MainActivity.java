@@ -119,66 +119,9 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(convertToTheme(settings[0].getTheme()));
         setContentView(R.layout.activity_main);
 
-        progressDialog.show();
         MobileAds.initialize(this, () -> {
 
         });
-
-        appOpenAdLoader = new AppOpenAdLoader(context);
-        AppOpenAdLoadListener appOpenAdLoadListener = new AppOpenAdLoadListener() {
-            @Override
-            public void onAdLoaded(@NonNull final AppOpenAd appOpenAd) {
-                // The ad was loaded successfully. Now you can show loaded ad.
-                mAppOpenAd = appOpenAd;
-                mAppOpenAd.show(activity);
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
-                // Ad failed to load with AdRequestError.
-                // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
-                progressDialog.dismiss();
-            }
-        };
-        appOpenAdLoader.setAdLoadListener(appOpenAdLoadListener);
-        appOpenAdLoader.loadAd(adRequestConfiguration);
-
-        AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
-            @Override
-            public void onAdShown() {
-                // Called when ad is shown.
-            }
-
-            @Override
-            public void onAdFailedToShow(@NonNull final AdError adError) {
-                // Called when ad failed to show.
-            }
-
-            @Override
-            public void onAdDismissed() {
-                // Called when ad is dismissed.
-                // Clean resources after dismiss and preload new ad.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Called when a click is recorded for an ad.
-            }
-
-            @Override
-            public void onAdImpression(@Nullable final ImpressionData impressionData) {
-                // Called when an impression is recorded for an ad.
-            }
-        };
-
-        if (mAppOpenAd != null) {
-            mAppOpenAd.setAdEventListener(appOpenAdEventListener);
-        }
-
-        if (mAppOpenAd != null) {
-            mAppOpenAd.show(activity);
-        }
 
 //        region::Service
 //        Intent intent = new Intent(this, WeatherService.class);
@@ -247,76 +190,145 @@ public class MainActivity extends AppCompatActivity {
 //        endregion
 
 //        region::Load ad
-        final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
-        final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
-        nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
-        nativeBulkAdLoader.setNativeBulkAdLoadListener(new NativeBulkAdLoadListener() {
-            @Override
-            public void onAdsLoaded(@NonNull final List<NativeAd> nativeAds) {
-                try {
-                    for (final NativeAd nativeAd : nativeAds) {
-                        final NativeAdViewBinder nativeAdViewBinder = new NativeAdViewBinder.Builder(mNativeAdView)
-                                .setAgeView(age)
-                                .setBodyView(bodyView)
-                                .setCallToActionView(call_to_action)
-                                .setDomainView(domain)
-                                //.setFaviconView(notesViewHolder.favicon)
-                                .setFeedbackView(imageViewFeedback)
-                                .setIconView(favicon)
-                                .setMediaView(mediaView)
-                                .setPriceView(priceView)
-                                //.setRatingView((MyRatingView) findViewById(R.id.rating))
-                                //.setReviewCountView((TextView) findViewById(R.id.review_count))
-                                .setSponsoredView(storeView)
-                                .setTitleView(tvHeadline)
-                                .setWarningView(warning)
-                                .build();
+        if (settings[0].getShowAd() > 2) {
+            progressDialog.show();
+            appOpenAdLoader = new AppOpenAdLoader(context);
+            AppOpenAdLoadListener appOpenAdLoadListener = new AppOpenAdLoadListener() {
+                @Override
+                public void onAdLoaded(@NonNull final AppOpenAd appOpenAd) {
+                    // The ad was loaded successfully. Now you can show loaded ad.
+                    mAppOpenAd = appOpenAd;
+                    mAppOpenAd.show(activity);
+                }
 
-                        try {
-                            nativeAd.bindNativeAd(nativeAdViewBinder);
-                            nativeAd.setNativeAdEventListener(new NativeAdEventListener() {
-                                @Override
-                                public void onAdClicked() {
-
-                                }
-
-                                @Override
-                                public void onLeftApplication() {
-
-                                }
-
-                                @Override
-                                public void onReturnedToApplication() {
-
-                                }
-
-                                @Override
-                                public void onImpression(@Nullable ImpressionData impressionData) {
-
-                                }
-                            });
-                            mNativeAdView.setVisibility(View.VISIBLE);
-                            adsCard.setVisibility(View.VISIBLE);
-                            progressDialog.dismiss();
-                        } catch (final NativeAdException exception) {
-                            Toast.makeText(context, exception.toString(), Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                @Override
+                public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
+                    // Ad failed to load with AdRequestError.
+                    // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
                     progressDialog.dismiss();
                 }
-            }
+            };
+            appOpenAdLoader.setAdLoadListener(appOpenAdLoadListener);
+            appOpenAdLoader.loadAd(adRequestConfiguration);
 
-            @Override
-            public void onAdsFailedToLoad(@NonNull final AdRequestError error) {
-                adsCard.setVisibility(View.GONE);
-                mNativeAdView.setVisibility(View.GONE);
-                progressDialog.dismiss();
-                //Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
+            AppOpenAdEventListener appOpenAdEventListener = new AppOpenAdEventListener() {
+                @Override
+                public void onAdShown() {
+                    progressDialog.dismiss();
+                }
+
+                @Override
+                public void onAdFailedToShow(@NonNull final AdError adError) {
+                    progressDialog.dismiss();
+                    // Called when ad failed to show.
+                }
+
+                @Override
+                public void onAdDismissed() {
+                    // Called when ad is dismissed.
+                    // Clean resources after dismiss and preload new ad.
+                }
+
+                @Override
+                public void onAdClicked() {
+                    // Called when a click is recorded for an ad.
+                }
+
+                @Override
+                public void onAdImpression(@Nullable final ImpressionData impressionData) {
+                    progressDialog.dismiss();
+                    // Called when an impression is recorded for an ad.
+                }
+            };
+
+            if (mAppOpenAd != null) {
+                mAppOpenAd.setAdEventListener(appOpenAdEventListener);
+                mAppOpenAd.show(activity);
             }
-        });
+            progressDialog.dismiss();
+        } else {
+            progressDialog.dismiss();
+        }
+
+        if (settings[0].getShowAd() > 2) {
+            progressDialog.show();
+            final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
+            final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
+            nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
+            nativeBulkAdLoader.setNativeBulkAdLoadListener(new NativeBulkAdLoadListener() {
+                @Override
+                public void onAdsLoaded(@NonNull final List<NativeAd> nativeAds) {
+                    try {
+                        for (final NativeAd nativeAd : nativeAds) {
+                            final NativeAdViewBinder nativeAdViewBinder = new NativeAdViewBinder.Builder(mNativeAdView)
+                                    .setAgeView(age)
+                                    .setBodyView(bodyView)
+                                    .setCallToActionView(call_to_action)
+                                    .setDomainView(domain)
+                                    //.setFaviconView(notesViewHolder.favicon)
+                                    .setFeedbackView(imageViewFeedback)
+                                    .setIconView(favicon)
+                                    .setMediaView(mediaView)
+                                    .setPriceView(priceView)
+                                    //.setRatingView((MyRatingView) findViewById(R.id.rating))
+                                    //.setReviewCountView((TextView) findViewById(R.id.review_count))
+                                    .setSponsoredView(storeView)
+                                    .setTitleView(tvHeadline)
+                                    .setWarningView(warning)
+                                    .build();
+
+                            try {
+                                nativeAd.bindNativeAd(nativeAdViewBinder);
+                                nativeAd.setNativeAdEventListener(new NativeAdEventListener() {
+                                    @Override
+                                    public void onAdClicked() {
+
+                                    }
+
+                                    @Override
+                                    public void onLeftApplication() {
+
+                                    }
+
+                                    @Override
+                                    public void onReturnedToApplication() {
+
+                                    }
+
+                                    @Override
+                                    public void onImpression(@Nullable ImpressionData impressionData) {
+
+                                    }
+                                });
+                                mNativeAdView.setVisibility(View.VISIBLE);
+                                adsCard.setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
+                            } catch (final NativeAdException exception) {
+                                Toast.makeText(context, exception.toString(), Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                }
+
+                @Override
+                public void onAdsFailedToLoad(@NonNull final AdRequestError error) {
+                    adsCard.setVisibility(View.GONE);
+                    mNativeAdView.setVisibility(View.GONE);
+                    progressDialog.dismiss();
+                    //Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            settings[0].putValue("showAd", (settings[0].getShowAd() + 1));
+            adsCard.setVisibility(View.GONE);
+            mNativeAdView.setVisibility(View.GONE);
+            progressDialog.dismiss();
+        }
+        progressDialog.dismiss();
 //        endregion
 
 //        region::Variables

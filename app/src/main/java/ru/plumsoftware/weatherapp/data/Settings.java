@@ -10,6 +10,8 @@ public class Settings {
     private String lang, system;
     private int theme;
 
+    private int showAd;
+
     protected static SharedPreferences sharedPreferences;
 
     public Settings(String q, String lang, String system) {
@@ -33,6 +35,15 @@ public class Settings {
         this.theme = theme;
     }
 
+    public Settings(String q, String city, String lang, String system, int theme, int showAd) {
+        this.q = q;
+        this.city = city;
+        this.lang = lang;
+        this.system = system;
+        this.theme = theme;
+        this.showAd = showAd;
+    }
+
     public static Settings getUserSettings(Context context) {
         sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
 
@@ -41,8 +52,9 @@ public class Settings {
         String system = sharedPreferences.getString("system", "metric");
         String city = sharedPreferences.getString("city", "");
         int theme = sharedPreferences.getInt("theme", AppCompatDelegate.MODE_NIGHT_NO);
+        int showAd = sharedPreferences.getInt("showAd", 0);
 
-        return new Settings(q, city, lang, system, theme);
+        return new Settings(q, city, lang, system, theme, showAd);
     }
 
     public void putValue(String name, Object value) {
@@ -51,14 +63,16 @@ public class Settings {
         if (value instanceof String) {
             String s = String.valueOf(value);
             editor.putString(name, s);
+            editor.apply();
+            return;
         }
 
         if (value instanceof Integer) {
             int i = Integer.parseInt(String.valueOf(value));
             editor.putInt(name, i);
+            editor.apply();
+            return;
         }
-
-        editor.apply();
     }
 
     public void putValue(String name, Integer value) {
@@ -87,5 +101,10 @@ public class Settings {
     public int getTheme() {
         return theme;
     }
-//    endregion
+
+    public int getShowAd() {
+        return showAd;
+    }
+
+    //    endregion
 }
