@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -40,7 +39,6 @@ import com.yandex.mobile.ads.common.AdError;
 import com.yandex.mobile.ads.common.AdRequestConfiguration;
 import com.yandex.mobile.ads.common.AdRequestError;
 import com.yandex.mobile.ads.common.ImpressionData;
-import com.yandex.mobile.ads.common.InitializationListener;
 import com.yandex.mobile.ads.common.MobileAds;
 import com.yandex.mobile.ads.nativeads.MediaView;
 import com.yandex.mobile.ads.nativeads.NativeAd;
@@ -73,7 +71,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.plumsoftware.weatherapp.activities.about.AboutActivity;
 import ru.plumsoftware.weatherapp.activities.locations.LocationActivity;
-import ru.plumsoftware.weatherapp.activities.locations.LocationActivityFirstTime;
 import ru.plumsoftware.weatherapp.activities.radar.RadarActivity;
 import ru.plumsoftware.weatherapp.activities.settings.SettingsActivity;
 import ru.plumsoftware.weatherapp.adapters.DayAdapter;
@@ -777,7 +774,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadCurrentWeather(WeatherManager weatherManager, Settings settings, TextView[] textViews, LinearLayout mainLayout, ImageView weatherPromo, Context context, CardView[] cardViews) throws Exception {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.show();
-        weatherManager.getCurrentWeather(settings.getQ(), "8babcdab0f80b414d35b6d4b0f3e752e", settings.getSystem(), settings.getLang()).enqueue(new Callback<CurrentWeather>() {
+        weatherManager.getCurrentWeather(settings.getQ(), "4e228e1be370d9d0d02284441d30cf0b", settings.getSystem(), settings.getLang()).enqueue(new Callback<CurrentWeather>() {
             @SuppressLint({"SetTextI18n"})
             @Override
             public void onResponse(@NonNull Call<CurrentWeather> call, @NonNull Response<CurrentWeather> response) {
