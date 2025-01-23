@@ -25,6 +25,7 @@ import ru.plumsoftware.weatherapp.R;
 import ru.plumsoftware.weatherapp.activities.locations.LocationActivity;
 import ru.plumsoftware.weatherapp.activities.main.MainActivity;
 import ru.plumsoftware.weatherapp.data.Settings;
+import ru.plumsoftware.weatherapp.model.AdsConfig;
 
 public class RadarActivity extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class RadarActivity extends AppCompatActivity {
 //        region::Setup map
         Glide.with(RadarActivity.this).load("https://tile.openweathermap.org/map/temp_new/1/1/1.png?appid=8babcdab0f80b414d35b6d4b0f3e752e").into(imageViewMap);
 
-        mBannerAdView.setAdUnitId("R-M-2149019-3");
+        mBannerAdView.setAdUnitId(AdsConfig.BANNER_ADS_ID);
         mBannerAdView.setAdSize(BannerAdSize.inlineSize(RadarActivity.this, displayMetrics.widthPixels, 160));
 
         AdRequest adRequest = new AdRequest.Builder().build();

@@ -84,6 +84,7 @@ import ru.plumsoftware.weatherapp.adapters.AlertAdapter;
 import ru.plumsoftware.weatherapp.adapters.WeatherForecastAdapter;
 import ru.plumsoftware.weatherapp.links.ApiData;
 import ru.plumsoftware.weatherapp.links.Link;
+import ru.plumsoftware.weatherapp.model.AdsConfig;
 import ru.plumsoftware.weatherapp.weatherdata.current.CurrentWeather;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.AirQuality;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.Alert;
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     @Nullable
     private RewardedAdLoader mRewardedAdLoader = null;
     private AppOpenAdLoader appOpenAdLoader = null;
-    private final String AD_UNIT_ID = "R-M-2149019-4";
+    private final String AD_UNIT_ID = AdsConfig.OPEN_ADS_ID;
     private final AdRequestConfiguration adRequestConfiguration = new AdRequestConfiguration.Builder(AD_UNIT_ID).build();
 
     private AppOpenAd mAppOpenAd = null;
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
         if (settings[0].getShowAd() > 2) {
             progressDialog.show();
             final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
-            final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
+            final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder(AdsConfig.NATIVE_ADS_ID).build();
             nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
             nativeBulkAdLoader.setNativeBulkAdLoadListener(new NativeBulkAdLoadListener() {
                 @Override
@@ -489,7 +490,7 @@ public class MainActivity extends AppCompatActivity {
 
                             ProgressDialog progressDialog = new ProgressDialog(context);
                             final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
-                            final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
+                            final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder(AdsConfig.NATIVE_ADS_ID).build();
                             nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
                             nativeBulkAdLoader.setNativeBulkAdLoadListener(new NativeBulkAdLoadListener() {
                                 @Override
@@ -607,7 +608,7 @@ public class MainActivity extends AppCompatActivity {
 
                     ProgressDialog progressDialog = new ProgressDialog(context);
                     final NativeBulkAdLoader nativeBulkAdLoader = new NativeBulkAdLoader(context);
-                    final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder("R-M-2149019-2").build();
+                    final NativeAdRequestConfiguration nativeAdRequestConfiguration = new NativeAdRequestConfiguration.Builder(AdsConfig.NATIVE_ADS_ID).build();
                     nativeBulkAdLoader.loadAds(nativeAdRequestConfiguration, 1);
                     nativeBulkAdLoader.setNativeBulkAdLoadListener(new NativeBulkAdLoadListener() {
                         @Override
