@@ -3,6 +3,7 @@ package ru.plumsoftware.weatherapp.api;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import ru.plumsoftware.weatherapp.weatherdata.air_polutaon.AirQualityResponse;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.ForecastWeather;
 import ru.plumsoftware.weatherapp.weatherdata.forecast_owm.MainWeatherResponse;
 
@@ -21,6 +22,15 @@ public interface ApiDailyInterface {
     @GET("forecast")
     Call<MainWeatherResponse> getForecastWeatherNew(
             @Query("q") String q,
+            @Query("appid") String appid,
+            @Query("units") String units,
+            @Query("lang") String lang
+    );
+
+    @GET("air_pollution")
+    Call<AirQualityResponse> getAirPollution(
+            @Query("lon") String lon,
+            @Query("lat") String lat,
             @Query("appid") String appid,
             @Query("units") String units,
             @Query("lang") String lang

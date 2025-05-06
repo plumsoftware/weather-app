@@ -85,6 +85,8 @@ import ru.plumsoftware.weatherapp.adapters.WeatherForecastAdapter;
 import ru.plumsoftware.weatherapp.links.ApiData;
 import ru.plumsoftware.weatherapp.links.Link;
 import ru.plumsoftware.weatherapp.model.AdsConfig;
+import ru.plumsoftware.weatherapp.weatherdata.air_polutaon.AirQualityItem;
+import ru.plumsoftware.weatherapp.weatherdata.air_polutaon.AirQualityResponse;
 import ru.plumsoftware.weatherapp.weatherdata.current.CurrentWeather;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.AirQuality;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.Alert;
@@ -366,7 +368,9 @@ public class MainActivity extends AppCompatActivity {
                         mainLayout,
                         imageViewWeatherPromo,
                         context,
-                        cardViews);
+                        cardViews,
+                        pieChart,
+                        recyclerViews);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -386,21 +390,21 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            try {
-
-                loadDailyForecast(
-                        weatherManager,
-                        settings[0],
-                        recyclerViewDailyForecast,
-                        mainLayout,
-                        context,
-                        activity,
-                        3
-                );
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+//            try {
+//
+//                loadDailyForecast(
+//                        weatherManager,
+//                        settings[0],
+//                        recyclerViewDailyForecast,
+//                        mainLayout,
+//                        context,
+//                        activity,
+//                        3
+//                );
+//
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
         } else {
             Snackbar
                     .make(context, mainLayout, "Укажите местоположение", Snackbar.LENGTH_SHORT)
@@ -465,7 +469,9 @@ public class MainActivity extends AppCompatActivity {
                                         mainLayout,
                                         imageViewWeatherPromo,
                                         context,
-                                        cardViews);
+                                        cardViews,
+                                        pieChart,
+                                        recyclerViews);
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
@@ -583,7 +589,9 @@ public class MainActivity extends AppCompatActivity {
                                 mainLayout,
                                 imageViewWeatherPromo,
                                 context,
-                                cardViews);
+                                cardViews,
+                                pieChart,
+                                recyclerViews);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -769,7 +777,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //    region::Load weather data
-    private void loadCurrentWeather(WeatherManager weatherManager, Settings settings, TextView[] textViews, LinearLayout mainLayout, ImageView weatherPromo, Context context, CardView[] cardViews) throws Exception {
+    private void loadCurrentWeather(WeatherManager weatherManager, Settings settings, TextView[] textViews, LinearLayout mainLayout, ImageView weatherPromo, Context context, CardView[] cardViews, PieChart pieChart, RecyclerView[] recyclerViews) throws Exception {
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.show();
         weatherManager.getCurrentWeather(settings.getQ(), "4e228e1be370d9d0d02284441d30cf0b", settings.getSystem(), settings.getLang()).enqueue(new Callback<CurrentWeather>() {
@@ -828,6 +836,79 @@ public class MainActivity extends AppCompatActivity {
                         textViews[6].setText(response.body().getWind().getSpeed() + " миль/час");
                     }
 
+                    weatherManager.getAirQuality(response.body().getCoord().getLon().toString(), response.body().getCoord().getLat().toString(), "4e228e1be370d9d0d02284441d30cf0b", settings.getSystem(), settings.getLang()).enqueue(new Callback<AirQualityResponse>() {
+                        @Override
+                        public void onResponse(@NonNull Call<AirQualityResponse> call, @NonNull Response<AirQualityResponse> response) {
+
+                            assert response.body() != null;
+                            AirQualityItem airQuality = response.body().getList().get(0);
+                            List<AirQualityData> airQualityDataList = new ArrayList<>();
+
+                            String[] names = new String[]{
+                                    "Угарный газ (CO)",
+                                    "Оксид азота (NO)",
+                                    "Диоксид азота (NO₂)",
+                                    "Озон (O₃)",
+                                    "Диоксид серы (SO₂)",
+                                    "Твердые микрочастицы (PM₂_₅)",
+                                    "Твердые микрочастицы (PM₁₀)"
+                            };
+
+                            int[] colors = new int[]{
+                                    getResources().getColor(R.color.blue_700),
+                                    getResources().getColor(R.color.orange_700),
+                                    getResources().getColor(R.color.green_700),
+                                    getResources().getColor(R.color.red_700),
+                                    getResources().getColor(R.color.purple_700),
+                                    getResources().getColor(R.color.blue_400),
+                                    getResources().getColor(R.color.pink_400),
+                            };
+
+                            ArrayList<Float> values = new ArrayList<>();
+
+                            pieChart.clearChart();
+                            pieChart.setAutoCenterInSlice(false);
+
+                            pieChart.addPieSlice(new PieModel(names[0], BigDecimal.valueOf(airQuality.getComponents().getCo()).floatValue(), colors[0]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getCo()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[1], BigDecimal.valueOf(airQuality.getComponents().getNo()).floatValue(), colors[1]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getNo()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[2], BigDecimal.valueOf(airQuality.getComponents().getNo2()).floatValue(), colors[2]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getNo2()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[3], BigDecimal.valueOf(airQuality.getComponents().getO3()).floatValue(), colors[3]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getO3()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[4], BigDecimal.valueOf(airQuality.getComponents().getSo2()).floatValue(), colors[4]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getSo2()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[5], BigDecimal.valueOf(airQuality.getComponents().getPm25()).floatValue(), colors[5]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getPm25()).floatValue());
+
+                            pieChart.addPieSlice(new PieModel(names[6], BigDecimal.valueOf(airQuality.getComponents().getPm10()).floatValue(), colors[6]));
+                            values.add(BigDecimal.valueOf(airQuality.getComponents().getPm10()).floatValue());
+
+                            pieChart.startAnimation();
+
+                            for (int i = 0; i < 6; i++) {
+                                airQualityDataList.add(new AirQualityData(names[i], colors[i], values.get(i)));
+                            }
+
+                            AirQualityAdapter airQualityAdapter = new AirQualityAdapter(airQualityDataList, context);
+                            airQualityAdapter.notifyDataSetChanged();
+                            recyclerViews[2].setHasFixedSize(true);
+                            recyclerViews[2].setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                            recyclerViews[2].setAdapter(airQualityAdapter);
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<AirQualityResponse> call, @NonNull Throwable t) {
+
+                        }
+                    });
+
                     progressDialog.dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -870,218 +951,27 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
 
-//        weatherManager.getDailyWeather("863d89dfe5734725a09155301221203", settings.getQ(), 1, "yes", "yes", settings.getLang()).enqueue(new Callback<ForecastWeather>() {
-//            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
+//    private void loadDailyForecast(WeatherManager weatherManager, Settings settings, RecyclerView recyclerView, LinearLayout mainLayout, Context context, Activity activity, int days) {
+//        ProgressDialog progressDialog = new ProgressDialog(context);
+//        progressDialog.show();
+//        weatherManager.getDailyWeather(ApiData.API_KEY_2, settings.getQ(), days, "no", "no", settings.getLang()).enqueue(new Callback<ForecastWeather>() {
 //            @Override
 //            public void onResponse(@NonNull Call<ForecastWeather> call, @NonNull Response<ForecastWeather> response) {
 //                ForecastWeather body = response.body();
 //
 //                try {
-//                    String linkToImage = "https:" + Objects.requireNonNull(body).getCurrent().getCondition().getIcon();
-//                    String[] split = body.getCurrent().getLastUpdated().split(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis())));
-//
 //                    List<Forecastday> forecastDays = new ArrayList<>(Objects.requireNonNull(body).getForecast().getForecastday());
-//                    List<Hour> hours = new ArrayList<>();
-//                    List<Alert> alerts = new ArrayList<>(body.getAlerts().getAlert());
+//                    List<Pair<Day, String>> list = new ArrayList<>();
 //
-////                    alerts.clear();
-////                    alerts.addAll(body.getAlerts().getAlert());
-////
-//                    for (int i = 0; i < alerts.size(); i++) {
-//                        Pattern pattern = Pattern.compile(
-//                                "[" + "A-Za-z" + "\\d" + "\\s" + "\\p{Punct}" + "]" + "*"
-//                        );
-//                        Matcher matcher = pattern.matcher(alerts.get(i).getEvent());
-//
-//                        if (matcher.matches() && Settings.getUserSettings(MainActivity.this).getLang().equals(Locale.UK.getISO3Language())) {
-//
-//                        }
-//                        if (!Settings.getUserSettings(MainActivity.this).getLang().equals(Locale.UK.getISO3Language()) && matcher.matches()) {
-//                            alerts.remove(i);
-//                        }
+//                    for (int i = 0; i < days; i++) {
+//                        list.add(new Pair<>(forecastDays.get(i).getDay(), forecastDays.get(i).getDate()));
 //                    }
 //
-//                    if (alerts.size() != 0) {
-//                        alertsL.setVisibility(View.VISIBLE);
-//                    } else {
-//                        alertsL.setVisibility(View.GONE);
-//                    }
-//
-//                    AlertAdapter alertAdapter = new AlertAdapter(alerts, context);
-//                    alertAdapter.notifyDataSetChanged();
-//
-//                    recyclerViews[0].setLayoutManager(new LinearLayoutManager(context));
-//                    recyclerViews[0].setHasFixedSize(true);
-//                    recyclerViews[0].setAdapter(alertAdapter);
-//
-//                    for (int i = 0; i < 1; i++) {
-//                        hours.addAll(forecastDays.get(i).getHour());
-//                    }
-////
-//////                    if (body.getCurrent().getIsDay() == 1) {
-//////                        imageViewMainPromo.setImageResource(R.drawable.ic_wb_sunny);
-//////                        isDay = true;
-//////                    }
-//////                    if (body.getCurrent().getIsDay() == 0) {
-//////                        imageViewMainPromo.setImageResource(R.drawable.ic_nights_stay);
-//////                        isDay = false;
-//////                    }
-//////
-//////                    if (split.length == 1) {
-//////                        textViewUpdateTime.setText(split[0]);
-//////                    } else {
-//////                        textViewUpdateTime.setText(split[1]);
-//////                    }
-////
-//                    WeatherForecastAdapter weatherForecastAdapter = new WeatherForecastAdapter(hours, context);
-//                    weatherForecastAdapter.notifyDataSetChanged();
-//
-//                    recyclerViews[1].setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-//                    recyclerViews[1].setHasFixedSize(true);
-//                    recyclerViews[1].setAdapter(weatherForecastAdapter);
-//
-////                    double d = Math.round(body.getCurrent().getUv() * 10);
-////                    d = d / 10;
-////
-////                    String uv = Double.toString(d);
-//                    int uv = body.getCurrent().getUv().intValue();
-//                    textViews[6].setText(setupUVIndex(uv));
-////                    String windSpeed = "";
-////                    String visibility;
-////
-////                    windSpeed = Integer.toString(Math.toIntExact(Math.round(body.getCurrent().getWindKph()))) + " км/ч";
-////                    visibility = Integer.toString(Math.toIntExact(Math.round(body.getCurrent().getVisKm()))) + " км";
-////
-////                    //Another data
-////                    String humidity = Integer.toString(body.getCurrent().getHumidity()) + "%";
-////                    String cloud = Integer.toString(body.getCurrent().getCloud()) + "%";
-////
-//////                    dataList1.add(new Data("УФ индекс", uv, R.drawable.ic_uv));
-//////                    dataList1.add(new Data("Скорость ветра", windSpeed, R.drawable.ic_wind));
-//////                    dataList1.add(new Data("Облачность", cloud, R.drawable.ic_cloudy1));
-//////                    dataList1.add(new Data("Влажность", humidity, R.drawable.ic_humidity));
-////
-////                    //PieChart
-////                    AirQuality airQuality = body.getCurrent().getAirQuality();
-////
-////                    Double co = airQuality.getCo();
-////                    Double no2 = airQuality.getNo2();
-////                    Double so2 = airQuality.getSo2();
-////                    Double pm10 = airQuality.getPm10();
-////                    Double pm25 = airQuality.getPm25();
-////                    Double o3 = airQuality.getO3();
-////                    double dSum = co + no2 + so2 + pm10 + pm25 + o3;
-////
-////                    float sum = new BigDecimal(dSum).floatValue();
-////
-////                    //pieChart.setAutoCenterInSlice(false);
-////
-////                    float[] values = new float[6];
-////                    String[] names = new String[6];
-////                    int[] colors;
-////
-////
-//////                    pieChart.addPieSlice(new PieModel("CO", new BigDecimal(co).floatValue(), getResources().getColor(R.color.blue_700)));
-//////                    pieChart.addPieSlice(new PieModel("NO2", new BigDecimal(no2).floatValue(), getResources().getColor(R.color.orange_700)));
-//////                    pieChart.addPieSlice(new PieModel("SO2", new BigDecimal(so2).floatValue(), getResources().getColor(R.color.green_700)));
-//////
-//////                    pieChart.addPieSlice(new PieModel("PM10", new BigDecimal(pm10).floatValue(), getResources().getColor(R.color.red_700)));
-//////                    pieChart.addPieSlice(new PieModel("PM25", new BigDecimal(pm25).floatValue(), getResources().getColor(R.color.purple_700)));
-//////                    pieChart.addPieSlice(new PieModel("O3", new BigDecimal(o3).floatValue(), getResources().getColor(R.color.blue_400)));
-//////
-//////                    pieChart.startAnimation();
-////
-////                    values[0] = new BigDecimal((co * 100) / sum).floatValue();
-////                    values[1] = new BigDecimal((no2 * 100) / sum).floatValue();
-////                    values[2] = new BigDecimal((so2 * 100) / sum).floatValue();
-////                    values[3] = new BigDecimal((pm10 * 100) / sum).floatValue();
-////                    values[4] = new BigDecimal((pm25 * 100) / sum).floatValue();
-////                    values[5] = new BigDecimal((o3 * 100) / sum).floatValue();
-////
-////                    colors = new int[]{
-////                            getResources().getColor(R.color.blue_700),
-////                            getResources().getColor(R.color.orange_700),
-////                            getResources().getColor(R.color.green_700),
-////                            getResources().getColor(R.color.red_700),
-////                            getResources().getColor(R.color.purple_700),
-////                            getResources().getColor(R.color.blue_400)};
-////
-////                    names = new String[]{"CO", "NO2", "SO2", "PM10", "PM25", "O3"};
-////
-////                    airQualityDataList.clear();
-////
-////                    for (int i = 0; i < 6; i++) {
-////                        airQualityDataList.add(new AirQualityData(names[i], colors[i], values[i]));
-////                    }
-////
-////                    AirQualityAdapter airQualityAdapter = new AirQualityAdapter(airQualityDataList, MainActivity.this);
-////                    airQualityAdapter.notifyDataSetChanged();
-////                    recyclerAirQ.setHasFixedSize(true);
-////                    recyclerAirQ.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-////                    recyclerAirQ.setAdapter(airQualityAdapter);
-//
-//                    //PieChart
-//                    AirQuality airQuality = body.getCurrent().getAirQuality();
-//                    List<AirQualityData> airQualityDataList = new ArrayList<>();
-//
-//                    Double co = airQuality.getCo();
-//                    Double no2 = airQuality.getNo2();
-//                    Double so2 = airQuality.getSo2();
-//                    Double pm10 = airQuality.getPm10();
-//                    Double pm25 = airQuality.getPm25();
-//                    Double o3 = airQuality.getO3();
-//                    double dSum = co + no2 + so2 + pm10 + pm25 + o3;
-//
-//                    float sum = new BigDecimal(dSum).floatValue();
-//
-//                    String[] names = new String[]{
-//                            "Угарный газ (CO)",
-//                            "Диоксид азота (NO₂)",
-//                            "Диоксид серы (SO₂)",
-//                            "Твердые микрочастицы (PM₁₀)",
-//                            "Твердые микрочастицы (PM₂ ₅)",
-//                            "Озон (O₃)"};
-//
-//                    int[] colors = new int[]{
-//                            getResources().getColor(R.color.blue_700),
-//                            getResources().getColor(R.color.orange_700),
-//                            getResources().getColor(R.color.green_700),
-//                            getResources().getColor(R.color.red_700),
-//                            getResources().getColor(R.color.purple_700),
-//                            getResources().getColor(R.color.blue_400)};
-//
-//                    pieChart.clearChart();
-//                    pieChart.setAutoCenterInSlice(false);
-//
-//                    pieChart.addPieSlice(new PieModel(names[0], new BigDecimal(co).floatValue(), colors[0]));
-//                    pieChart.addPieSlice(new PieModel(names[1], new BigDecimal(no2).floatValue(), colors[1]));
-//                    pieChart.addPieSlice(new PieModel(names[2], new BigDecimal(so2).floatValue(), colors[2]));
-//
-//                    pieChart.addPieSlice(new PieModel(names[3], new BigDecimal(pm10).floatValue(), colors[3]));
-//                    pieChart.addPieSlice(new PieModel(names[4], new BigDecimal(pm25).floatValue(), colors[4]));
-//                    pieChart.addPieSlice(new PieModel(names[5], new BigDecimal(o3).floatValue(), colors[5]));
-//
-//                    pieChart.startAnimation();
-//
-//                    float[] values = new float[6];
-//
-//                    values[0] = new BigDecimal((co * 100) / sum).floatValue();
-//                    values[1] = new BigDecimal((no2 * 100) / sum).floatValue();
-//                    values[2] = new BigDecimal((so2 * 100) / sum).floatValue();
-//                    values[3] = new BigDecimal((pm10 * 100) / sum).floatValue();
-//                    values[4] = new BigDecimal((pm25 * 100) / sum).floatValue();
-//                    values[5] = new BigDecimal((o3 * 100) / sum).floatValue();
-//
-//                    for (int i = 0; i < 6; i++) {
-//                        airQualityDataList.add(new AirQualityData(names[i], colors[i], values[i]));
-//                    }
-//
-//                    AirQualityAdapter airQualityAdapter = new AirQualityAdapter(airQualityDataList, context);
-//                    airQualityAdapter.notifyDataSetChanged();
-//                    recyclerViews[2].setHasFixedSize(true);
-//                    recyclerViews[2].setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-//                    recyclerViews[2].setAdapter(airQualityAdapter);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//                    recyclerView.setHasFixedSize(true);
+//                    recyclerView.setAdapter(new DayAdapter(context, activity, list));
 //
 //                    progressDialog.dismiss();
 //                } catch (Exception e) {
@@ -1097,49 +987,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //            @Override
 //            public void onFailure(@NonNull Call<ForecastWeather> call, @NonNull Throwable t) {
+//                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
 //                progressDialog.dismiss();
 //            }
 //        });
-    }
-
-    private void loadDailyForecast(WeatherManager weatherManager, Settings settings, RecyclerView recyclerView, LinearLayout mainLayout, Context context, Activity activity, int days) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.show();
-        weatherManager.getDailyWeather(ApiData.API_KEY_2, settings.getQ(), days, "no", "no", settings.getLang()).enqueue(new Callback<ForecastWeather>() {
-            @Override
-            public void onResponse(@NonNull Call<ForecastWeather> call, @NonNull Response<ForecastWeather> response) {
-                ForecastWeather body = response.body();
-
-                try {
-                    List<Forecastday> forecastDays = new ArrayList<>(Objects.requireNonNull(body).getForecast().getForecastday());
-                    List<Pair<Day, String>> list = new ArrayList<>();
-
-                    for (int i = 0; i < days; i++) {
-                        list.add(new Pair<>(forecastDays.get(i).getDay(), forecastDays.get(i).getDate()));
-                    }
-
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setAdapter(new DayAdapter(context, activity, list));
-
-                    progressDialog.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Snackbar
-                            .make(MainActivity.this, mainLayout, "Ошибка: " + e.toString(), Snackbar.LENGTH_SHORT)
-                            .setTextColor(getResources().getColor(R.color.md_theme_dark_error))
-                            .setBackgroundTint(getResources().getColor(R.color.md_theme_dark_errorContainer))
-                            .show();
-                    progressDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ForecastWeather> call, @NonNull Throwable t) {
-                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
-    }
+//    }
 //    endregion
 }

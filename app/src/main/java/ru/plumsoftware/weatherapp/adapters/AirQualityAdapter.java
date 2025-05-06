@@ -37,10 +37,7 @@ public class AirQualityAdapter extends RecyclerView.Adapter<AirQualityDataHolder
         AirQualityData airQualityData = airQualityDataList.get(position);
 
         holder.cardColor.setCardBackgroundColor(airQualityData.getColor());
-        if (airQualityData.getValue() < 1)
-            holder.textViewAirDataValue.setText("< 1%");
-        else
-            holder.textViewAirDataValue.setText(Integer.toString(Math.round(airQualityData.getValue())) + "%");
+        holder.textViewAirDataValue.setText(Integer.toString(Math.round(airQualityData.getValue())));
         holder.textViewAirDataName.setText(airQualityData.getName());
     }
 
