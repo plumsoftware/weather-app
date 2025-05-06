@@ -26,7 +26,6 @@ import ru.plumsoftware.weatherapp.weatherdata.forecast_owm.WeatherItem;
 public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherHolder> {
     private final List<WeatherItem> weatherItems;
     private final Context context;
-    private final Calendar calendar = Calendar.getInstance();
     private final Settings settings;
 
     public WeatherForecastAdapter(List<WeatherItem> weatherItems, Context context) {
@@ -64,6 +63,8 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherHolder> 
             Rain rain = weatherItem.getRain();
             if (rain != null) {
                 holder.textViewValue.setText((int) (rain.getH3() * 100) + "%");
+            } else {
+                holder.textViewValue.setText("0%");
             }
 
             if (rain != null && rain.getH3() > 0.0) {

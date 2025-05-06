@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewDetailedStatus = (TextView) activity.findViewById(R.id.textViewDetailedStatus);
         TextView textViewTempYesterday = (TextView) activity.findViewById(R.id.textViewTempYesterday);
         TextView textViewChanceOfRain = (TextView) activity.findViewById(R.id.textViewChanceOfRain);
-        TextView textViewUVIndex = (TextView) activity.findViewById(R.id.textViewUVIndex);
+        TextView textViewWindSpeed = (TextView) activity.findViewById(R.id.textViewWindSpeed);
         TextView textViewSunriseTime = (TextView) activity.findViewById(R.id.textViewSunriseTime);
         TextView textViewSunsetTime = (TextView) activity.findViewById(R.id.textViewSunsetTime);
         EditText multiAutoCompleteTextView = (EditText) activity.findViewById(R.id.multiAutoCompleteTextView);
@@ -167,10 +167,6 @@ public class MainActivity extends AppCompatActivity {
         CardView cardSunset = (CardView) activity.findViewById(R.id.cardSunset);
 
         PieChart pieChart = (PieChart) activity.findViewById(R.id.pieChart);
-//        endregion
-
-//        region::Setup animations
-        findViewById(R.id.imageView5).startAnimation(sun_animation);
 //        endregion
 
 //        region::ADS
@@ -342,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewSunriseTime,
                 textViewSunsetTime,
                 textViewChanceOfRain,
-                textViewUVIndex,
+                textViewWindSpeed,
                 textViewTempYesterday
         };
 
@@ -825,6 +821,12 @@ public class MainActivity extends AppCompatActivity {
 
                     textViews[5].setText(response.body().getMain().getHumidity() + "%");
                     textViews[7].setText("Давление " + Integer.toString((int) (response.body().getMain().getPressure() * 0.75)) + " мм рт ст");
+
+                    if (settings.getSystem().equals("metric")) {
+                        textViews[6].setText(response.body().getWind().getSpeed() + " м/с");
+                    } else {
+                        textViews[6].setText(response.body().getWind().getSpeed() + " миль/час");
+                    }
 
                     progressDialog.dismiss();
                 } catch (Exception e) {
