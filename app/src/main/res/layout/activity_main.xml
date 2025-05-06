@@ -705,7 +705,7 @@
                                 android:paddingTop="8dp"
                                 android:paddingEnd="14dp"
                                 android:paddingBottom="8dp"
-                                android:text="24 часа"
+                                android:text="5 дней"
                                 android:textColor="?attr/colorText"
                                 android:textSize="14sp" />
                         </androidx.cardview.widget.CardView>
