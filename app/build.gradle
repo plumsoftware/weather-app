@@ -24,8 +24,8 @@ android {
         applicationId "ru.plumsoftware.weatherapp"
         minSdk 26
         targetSdk 36
-        versionCode 26
-        versionName "2.0.8"
+        versionCode 27
+        versionName "2.0.1"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
