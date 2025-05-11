@@ -8,8 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.plumsoftware.weatherapp.api.ApiDailyInterface;
 import ru.plumsoftware.weatherapp.api.ApiInterface;
 import ru.plumsoftware.weatherapp.data.Settings;
+import ru.plumsoftware.weatherapp.weatherdata.air_polutaon.AirQualityResponse;
 import ru.plumsoftware.weatherapp.weatherdata.current.CurrentWeather;
 import ru.plumsoftware.weatherapp.weatherdata.forecast.ForecastWeather;
+import ru.plumsoftware.weatherapp.weatherdata.forecast_owm.MainWeatherResponse;
 
 public class WeatherManager {
     private String lang;
@@ -43,4 +45,27 @@ public class WeatherManager {
 
         return apiDailyInterface.getForecastWeather(key, q, days, aqi, alerts, lang);
     }
+
+    public Call<MainWeatherResponse> getDailyWeatherNew(String q, String appid, String units, String lang) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.openweathermap.org/data/2.5/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiDailyInterface apiDailyInterface = retrofit.create(ApiDailyInterface.class);
+
+        return apiDailyInterface.getForecastWeatherNew(q, appid, units, lang);
+    }
+
+    public Call<AirQualityResponse> getAirQuality(String lon, String lat, String appid, String units, String lang) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.openweathermap.org/data/2.5/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiDailyInterface apiDailyInterface = retrofit.create(ApiDailyInterface.class);
+
+        return apiDailyInterface.getAirPollution(lon, lat, appid, units, lang);
+    }
+
 }

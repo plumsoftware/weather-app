@@ -423,7 +423,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView5"
@@ -619,7 +620,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="8dp"
                                 android:layout_weight="0"
-                                app:srcCompat="@drawable/ic_sun" />
+                                app:srcCompat="@drawable/windy" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -634,12 +635,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
                                     android:fontFamily="@font/roboto_bold"
-                                    android:text="УФ индекс"
+                                    android:text="Ветер"
                                     android:textColor="?attr/colorText"
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/textViewUVIndex"
+                                    android:id="@+id/textViewWindSpeed"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textColor="?attr/colorText"
@@ -705,7 +706,7 @@
                                 android:paddingTop="8dp"
                                 android:paddingEnd="14dp"
                                 android:paddingBottom="8dp"
-                                android:text="24 часа"
+                                android:text="5 дней"
                                 android:textColor="?attr/colorText"
                                 android:textSize="14sp" />
                         </androidx.cardview.widget.CardView>
@@ -720,7 +721,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView16"

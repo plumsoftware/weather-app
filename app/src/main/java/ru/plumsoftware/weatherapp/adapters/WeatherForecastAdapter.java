@@ -20,16 +20,16 @@ import java.util.Locale;
 
 import ru.plumsoftware.weatherapp.R;
 import ru.plumsoftware.weatherapp.data.Settings;
-import ru.plumsoftware.weatherapp.weatherdata.forecast.Hour;
+import ru.plumsoftware.weatherapp.weatherdata.forecast_owm.Rain;
+import ru.plumsoftware.weatherapp.weatherdata.forecast_owm.WeatherItem;
 
 public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherHolder> {
-    private List<Hour> hours;
-    private Context context;
-    private Calendar calendar = Calendar.getInstance();
-    private Settings settings;
+    private final List<WeatherItem> weatherItems;
+    private final Context context;
+    private final Settings settings;
 
-    public WeatherForecastAdapter(List<Hour> hours, Context context) {
-        this.hours = hours;
+    public WeatherForecastAdapter(List<WeatherItem> weatherItems, Context context) {
+        this.weatherItems = weatherItems;
         this.context = context;
         settings = Settings.getUserSettings(context);
     }
@@ -43,73 +43,43 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherHolder> 
     @SuppressLint({"CheckResult", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull WeatherHolder holder, int position) {
-        Hour hour = hours.get(position);
+        WeatherItem weatherItem = weatherItems.get(position);
+        String dateTime = new SimpleDateFormat("dd MMMM \n HH:mm", Locale.getDefault()).format(new Date(weatherItem.getDt() * 1000L));
+        holder.textViewTime.setText(dateTime);
 
-//        String link = "https:" + hour.getCondition().getIcon();
-//
-//        Glide
-//                .with(context)
-//                .load(link)
-//                .into(holder.imageViewSmallPromo);
-
-        String time = hour.getTime();
-
-//        String[] split = time.split(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(System.currentTimeMillis())));
-        String[] split = time.split("\\s");
-
-        holder.textViewTime.setText(split[1]);
-
-        int temp = 0;
+        int temp;
 
         if (settings.getSystem().equals("metric")) {
-            temp = Math.toIntExact(Math.round(hour.getTempC()));
-            holder.textViewTemp.setText(Integer.toString(temp) + "°C");
+            temp = Math.toIntExact(Math.round(weatherItem.getMain().getTemp()));
+            holder.textViewTemp.setText(temp + "°C");
         } else {
-            temp = Math.toIntExact(Math.round(hour.getTempF()));
-            holder.textViewTemp.setText(Integer.toString(temp) + "°F");
+            temp = Math.toIntExact(Math.round(weatherItem.getMain().getTemp()));
+            holder.textViewTemp.setText(temp + "°F");
         }
 
-        if (hour.getTempC() > 0.0) {
+        if (weatherItem.getMain().getTemp() > 0.0) {
             //Summer
             holder.card.getLayoutParams().height = temp * 3;
-            holder.textViewValue.setText(Integer.toString(hour.getChanceOfRain()) + "%");
+            Rain rain = weatherItem.getRain();
+            if (rain != null) {
+                holder.textViewValue.setText((int) (rain.getH3() * 100) + "%");
+            } else {
+                holder.textViewValue.setText("0%");
+            }
 
-            if (hour.getChanceOfRain() > 0) {
-//                Glide
-//                        .with(context)
-//                        .load(R.drawable.rainy_fill1_wght400_grad0_opsz48)
-//                        .into(holder.imageViewSmallPromo);
+            if (rain != null && rain.getH3() > 0.0) {
                 holder.imageViewSmallPromo.setImageResource(R.drawable.rainy_fill1_wght400_grad0_opsz48);
             } else {
-//                Glide
-//                        .with(context)
-//                        .load(R.drawable.ic_baseline_cloud_24)
-//                        .into(holder.imageViewSmallPromo);
                 holder.imageViewSmallPromo.setImageResource(R.drawable.ic_baseline_cloud_24);
             }
         } else {
-            holder.card.getLayoutParams().height = temp * (-3);
-            holder.textViewValue.setText(Integer.toString(hour.getChanceOfSnow()) + "%");
-
-            if (hour.getChanceOfSnow() > 0) {
-//                Glide
-//                        .with(context)
-//                        .load(R.drawable.weather_snowy_fill1_wght400_grad0_opsz48)
-//                        .into(holder.imageViewSmallPromo);
-                holder.imageViewSmallPromo.setImageResource(R.drawable.weather_snowy_fill1_wght400_grad0_opsz48);
-            } else {
-//                Glide
-//                        .with(context)
-//                        .load(R.drawable.ic_baseline_cloud_24)
-//                        .into(holder.imageViewSmallPromo);
-                holder.imageViewSmallPromo.setImageResource(R.drawable.ic_baseline_cloud_24);
-            }
+            holder.imageViewSmallPromo.setImageResource(R.drawable.ic_baseline_cloud_24);
         }
     }
 
     @Override
     public int getItemCount() {
-        return hours.size();
+        return weatherItems.size();
     }
 }
 
@@ -123,12 +93,12 @@ class WeatherHolder extends RecyclerView.ViewHolder {
 
         setIsRecyclable(true);
 
-        textViewValue = (TextView) itemView.findViewById(R.id.textViewValue);
-        textViewTime = (TextView) itemView.findViewById(R.id.textViewTime);
-        textViewTemp = (TextView) itemView.findViewById(R.id.textViewTemp);
+        textViewValue = itemView.findViewById(R.id.textViewValue);
+        textViewTime = itemView.findViewById(R.id.textViewTime);
+        textViewTemp = itemView.findViewById(R.id.textViewTemp);
 
-        imageViewSmallPromo = (ImageView) itemView.findViewById(R.id.imageViewSmallPromo);
+        imageViewSmallPromo = itemView.findViewById(R.id.imageViewSmallPromo);
 
-        card = (CardView) itemView.findViewById(R.id.card);
+        card = itemView.findViewById(R.id.card);
     }
 }
